@@ -1,0 +1,41 @@
+$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+// bower:scss
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+body {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.container {
+
+}
+
+#wrapper {
+	
+	margin: auto;
+}
+
+/* Main marketing message */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+	background-image: url(http://placekitten.com/1150/340);
+	background-repeat: no-repeat;
+	height:300px;
+	h1 {
+		color: #fff;
+		text-shadow: 1px 1px 2px #000;
+	}
+}
+
+/* Footer */
+.footer {
+	margin-top: 20px;
+  padding-top: 20px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+

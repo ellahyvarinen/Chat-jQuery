@@ -1,0 +1,282 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Chat</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <!-- build:js scripts/vendor/modernizr.js -->
+  <script src="/bower_components/modernizr/modernizr.js"></script>
+  <!-- endbuild -->
+
+</head>
+
+<body>
+  <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+  <!-- MODALS -->
+
+  <!-- New message modal -->
+  <div id="messageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">New message</h4>
+        </div>
+        <div class="modal-body">
+          <form id="messageForm">
+            <label for="message">Write your message</label>
+            <textarea name="message" class="form-control" rows="3"></textarea>
+            <input type="hidden" name="uID">
+            <br>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image modal -->
+  <div id="imageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Profile image</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-inline" id="imageForm">
+            <label for="name">Choose image</label>
+						<br>
+            <input type="file" class="form-control" id="imageFile" name="file" placeholder="Image file">
+            <input type="hidden" name="uID" value="">
+            <br><br>
+            <button type="submit" class="btn btn-default">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reply modal -->
+  <div id="replyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reply</h4>
+        </div>
+        <div class="modal-body">
+          <form id="replyForm">
+            <label for="message">Write your message</label>
+            <textarea name="message" class="form-control" rows="3"></textarea>
+            <input type="hidden" name="uID">
+            <br>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modify modal -->
+  <div id="modifyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reply</h4>
+        </div>
+        <div class="modal-body">
+          <form id="modifyForm">
+            <label for="message">Write your message</label>
+            <textarea name="message" class="form-control" rows="3"></textarea>
+            <input type="hidden" name="uID">
+            <br>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+	
+	<!-- Delete Profile modal -->
+  <div id="deleteModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Delete Profile</h4>
+        </div>
+        <div class="modal-body">
+          <form id="deleteProfileForm">
+            <label>Are you sure you want to leave Cat Chat?</label>
+            <input type="hidden" name="uID">
+            <br><br>
+            <button type="submit" class="btn btn-default">Yes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+
+    <div class="jumbotron">
+      <h1>Cat Chat</h1>
+    </div>
+
+    <div class="login">
+      <h2>Log in</h2>
+      <form class="form-inline" id="loginForm">
+        <div class="form-group">
+          <label class="sr-only">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+        </div>
+        <button type="submit" class="btn btn-default">Log in</button>
+      </form>
+
+      <h2>Create account</h2>
+      <form class="form-inline" id="signUpForm">
+        <div class="form-group">
+          <label class="sr-only">Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+        </div>
+        <button type="submit" class="btn btn-default">Create account</button>
+      </form>
+			<br>
+			<hr>
+    </div>
+
+		<div class="row">
+		<br>
+    <!-- PROFILE -->
+    <div class="col-md-4" id="profile">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Profile <small>Username</small></h3>
+          <!--<h3 class="panel-title">Username</h3>-->
+        </div>
+        <div class="panel-body">
+          <!-- <img class="media-object img-thumbnail center-block" src="http://placekitten.com/200/199" alt=""> -->
+          <img alt="profile image" class="media-object img-thumbnail center-block" src="http://placekitten.com/200/199">
+        </div>
+
+        <div class="panel-footer">
+          <!-- BUTTONS -->
+          <div class="btn-group btn-group-justified" role="group">
+            <!-- Change profile image button -->
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#imageModal">Profile image</button>
+            </div>
+            <!-- Write new message button -->
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#messageModal">New Message</button>
+            </div>
+            <!-- Delete profile button -->
+            <div class="btn-group" role="group">
+              <button type="button" id="delete" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal">Delete profile</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+		<div class="col-md-6">
+			<h2>Messages</h2>
+    	<div id="messages"></div>
+    	<!--
+       <div class="col-md-6" id="messagePanel">
+          <h2>Messages</h2>
+
+					<div class="panel panel-default">
+            <div class="panel-body">
+              <ul class="media-list" id="messages"></ul>
+            </div>
+          </div>
+
+        </div>
+				-->
+			</div>
+		</div>
+    
+
+
+    <div class="footer" style="text-align:center">
+      <p><span class="glyphicon glyphicon-heart"></span> Live chat for cat lovers <span class="glyphicon glyphicon-heart"></span></p>
+    </div>
+
+
+  </div>
+
+
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="/bower_components/jquery/dist/jquery.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+
+  <!-- build:js(.) scripts/plugins.js -->
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/alert.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/transition.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/button.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/popover.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/carousel.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/collapse.js"></script>
+  <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tab.js"></script>
+  <!-- endbuild -->
+
+
+  <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="http://malsup.github.io/min/jquery.form.min.js"></script>
+  <!-- build:js(.tmp) scripts/main.js -->
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+
+  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+  <script>
+    (function(b, o, i, l, e, r) {
+      b.GoogleAnalyticsObject = l;
+      b[l] || (b[l] =
+        function() {
+          (b[l].q = b[l].q || []).push(arguments)
+        });
+      b[l].l = +new Date;
+      e = o.createElement(i);
+      r = o.getElementsByTagName(i)[0];
+      e.src = 'https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+  </script>
+</body>
+
+</html>
